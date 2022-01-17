@@ -1,0 +1,9 @@
+export 'package:cimos_v1/widgets/card_videos.dart';
+export 'package:cimos_v1/widgets/customBottonBar.dart';
+export 'package:cimos_v1/widgets/input_sesion.dart';
+export 'package:cimos_v1/widgets/login_container.dart';
+export 'package:cimos_v1/widgets/logo.dart';
+export 'package:cimos_v1/widgets/register_container.dart';
+export 'package:cimos_v1/widgets/shared/shared_widgets.dart';
+export 'package:cimos_v1/widgets/video_player_text.dart';
+export 'package:cimos_v1/widgets/video_player.dart';
