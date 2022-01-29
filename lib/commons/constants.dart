@@ -10,5 +10,5 @@ class Constant {
       "Ocurrió un error inesperado. Intente en unos momentos";
 
   /*API Cimos End Points*/
-  static const String API_VIDEOS = "https://cimos.grandstars.com.mx/v1/VOD";
+  static const String API_VIDEOS = "https://api.cimos.mx/v1/VOD";
 }

@@ -26,6 +26,7 @@ class CustomLogin extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50))),
             onPressed: () {
+              Navigator.of(context).pop();
               Navigator.pushNamed(context, '/home');
             },
             child: const Text('Ingresar', style: TextStyle(fontSize: 20))),

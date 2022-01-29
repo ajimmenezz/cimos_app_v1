@@ -1,3 +1,4 @@
+import 'package:cimos_v1/theme/cimos_theme.dart';
 import 'package:flutter/material.dart';
 
 import '/models/vods.dart';
@@ -5,8 +6,10 @@ import '/http/http_exec.dart';
 import '/commons/constants.dart';
 import '/models/http_response.dart';
 
-import 'package:cimos_v1/widgets/widgets.dart' show CardVideos, CustomButtonBar, Loaders;
+import 'package:cimos_v1/widgets/widgets.dart'
+    show CardVideos, CustomButtonBar, Loaders;
 
+import 'package:cimos_v1/search/search_delegate.dart';
 class TopVideos extends StatefulWidget {
   const TopVideos({Key? key}) : super(key: key);
 
@@ -42,15 +45,20 @@ class _TopVideosState extends State<TopVideos> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('TopVideos'),
-          backgroundColor: Colors.blue,
+          title: const Text('VideosOnDemand'),
+          backgroundColor: CimosTheme.primary,
+          actions: [
+            IconButton(
+                onPressed: () =>
+                    showSearch(context: context, delegate: VideoSearchDelegate()),
+                icon: const Icon(Icons.search))
+          ],
         ),
         bottomNavigationBar: const CustomButtonBar(),
         body: _isLoading
             ? Center(child: Loaders.circular())
-            : Container(
-                child: ListView(
-                  padding: EdgeInsets.only(left: 4, right: 4),
+            : SingleChildScrollView(
+                child: Column(
                   children: [
                     for (CimosVODS v in vods)
                       CardVideos(

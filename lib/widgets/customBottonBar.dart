@@ -25,9 +25,11 @@ class _CustomButtonBarState extends State<CustomButtonBar> {
 
         switch (i) {
           case 0:
+            Navigator.of(context).pop();
             Navigator.pushNamed(context, '/home');
             break;
           case 1:
+            Navigator.of(context).pop();
             Navigator.pushNamed(context, '/topvideos');
             break;
           case 2:

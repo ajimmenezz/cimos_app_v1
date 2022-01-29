@@ -21,14 +21,13 @@ class CardVideos extends StatelessWidget {
                 child: FadeInImage.assetNetwork(
                   placeholder: 'assets/loading.gif',
                   image: "${video.pictureId}",
-                  //TODO Revisar el gif de carga
                   width: double.infinity,
                   fit: BoxFit.fitWidth,
                   height: MediaQuery.of(context).size.height * 0.29,
                 ),
               ),
               Container(
-                //TODO Tamaño del contenedor "ALTURA" "RECORDAR HACER EL REPOSITORIO"
+                //Altura del contenedor
                 height: MediaQuery.of(context).size.height * 0.29,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),

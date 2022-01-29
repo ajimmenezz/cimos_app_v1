@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                       children: [
                         // Contenedor de inicio de sesion
                         Container(
-                          padding: const EdgeInsets.only(left: 5, right: 5),
+                          padding: const EdgeInsets.only(left: 10, right: 10),
                           color: Colors.white,
                           width: MediaQuery.of(context).size.width,
                           child: const Form(
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(width: MediaQuery.of(context).size.width * .05), // Division
                         // Contenedor de registro
                         Container(
-                          padding: const EdgeInsets.only(left: 5, right: 5),
+                          padding: const EdgeInsets.only(left: 10, right: 10),
                           color: Colors.white,
                           width: MediaQuery.of(context).size.width,
                           child: const Form(

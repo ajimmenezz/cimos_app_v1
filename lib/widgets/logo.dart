@@ -6,6 +6,7 @@ class LogoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(40),
       width: double.infinity,
       height: 300, 
       child: const FadeInImage(

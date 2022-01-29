@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:cimos_v1/screens/screens.dart';
 import 'package:cimos_v1/providers/ui_provider.dart';
 
+import 'package:cimos_v1/theme/cimos_theme.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -21,10 +22,7 @@ class MyApp extends StatelessWidget {
           '/topvideos': (context) => const TopVideos(),
           '/videosdetails': (context) => const VideoDetailsScreen(information: {}),
         },
-        theme: ThemeData.light(),
-        // Rutas dinamicas
-        // onGenerateRoute: AppRoutes.onGenerateRoute,
-        // theme: AppTheme.lightTheme,  // Aqui vamos a manejar el
+        theme: CimosTheme.lightTheme,
       ),
     );
     // Rutas
