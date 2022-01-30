@@ -34,7 +34,7 @@ class VideoDetailsScreen extends StatelessWidget {
             VideoPlayerText(value: information['name'], color: Colors.white, size: 30),
             VideoPlayerText(value: information['created'], color: Colors.green, size: 20),
             VideoPlayerText(value: '${information['duration']} Min'.toString(), color: Colors.green, size: 20),
-            VideoPlayerText(value: '${information['description']}', color: Colors.white, size: 20),
+            VideoPlayerText(value: '${information['description'] ?? 'Sin descripcion'}', color: Colors.white, size: 20),
             // CastSample(),
           ],
         )

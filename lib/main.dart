@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         home: LoginScreen(),
         routes: {
           '/home': (context) => const HomePageScreen(),
-          '/topvideos': (context) => const TopVideos(),
+          '/topvideos': (context) => const VideosOnDemand(),
           '/videosdetails': (context) => const VideoDetailsScreen(information: {}),
         },
         theme: CimosTheme.lightTheme,
