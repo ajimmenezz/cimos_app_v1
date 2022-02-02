@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 
 import '/models/vods.dart';
 import '/http/http_exec.dart';
-import '/commons/constants.dart';
 import '/models/http_response.dart';
 
 import 'package:cimos_v1/widgets/widgets.dart'
-    show CardVideos, CustomButtonBar, Loaders;
+    show CardVideos, CustomButtonBar, Loaders, LoadingIcon;
 
 import 'package:cimos_v1/search/search_delegate.dart';
 
@@ -19,7 +18,7 @@ class VideosOnDemand extends StatefulWidget {
 }
 
 class _VideosOnDemandState extends State<VideosOnDemand> {
-  bool _isLoading = false;
+  bool _isLoading = true;
   late HttpResponse response;
   List<CimosVODS> vods = <CimosVODS>[];
   int numberPage = 1;
@@ -112,38 +111,9 @@ class _VideosOnDemandState extends State<VideosOnDemand> {
                     Positioned(
                       bottom: 40,
                       left: size.width * 0.5 - 30,
-                      child: const _LoadingIcon(),
+                      child: const LoadingIcon(),
                     )
                 ],
               ));
   }
 }
-
-class _LoadingIcon extends StatelessWidget {
-  const _LoadingIcon({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      height: 60,
-      width: 60,
-      decoration:
-          const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-      child: const CircularProgressIndicator(color: CimosTheme.primary),
-    );
-  }
-}
-
-// SingleChildScrollView(
-//                 child: Column(
-//                   children: [
-//                     for (CimosVODS v in vods)
-//                       CardVideos(
-//                         video: v,
-//                       )
-//                   ],
-//                 ),
-//               )

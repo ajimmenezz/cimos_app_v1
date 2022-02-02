@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CimosTheme {
-  static const Color primary = Colors.red;
+  static const Color primary = Color.fromRGBO(181, 79, 79, 1);
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     // Color primario
