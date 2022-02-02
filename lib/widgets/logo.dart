@@ -8,9 +8,9 @@ class LogoContainer extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(40),
       width: double.infinity,
-      height: 300, 
+      height: 300,
       child: const FadeInImage(
-        placeholder: NetworkImage('https://via.placeholder.com/200x300'),
+        placeholder: AssetImage('assets/logo5.png'),
         image: AssetImage('assets/logo5.png'),
       ),
     );

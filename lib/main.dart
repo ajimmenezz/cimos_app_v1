@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:cimos_v1/screens/screens.dart';
 import 'package:cimos_v1/providers/ui_provider.dart';
 
 import 'package:cimos_v1/theme/cimos_theme.dart';
-void main() => runApp(const MyApp());
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(const MyApp());
+  });
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -20,7 +31,8 @@ class MyApp extends StatelessWidget {
         routes: {
           '/home': (context) => const HomePageScreen(),
           '/topvideos': (context) => const VideosOnDemand(),
-          '/videosdetails': (context) => const VideoDetailsScreen(information: {}),
+          '/videosdetails': (context) =>
+              const VideoDetailsScreen(information: {}),
         },
         theme: CimosTheme.lightTheme,
       ),

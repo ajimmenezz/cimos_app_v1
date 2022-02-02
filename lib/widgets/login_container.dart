@@ -1,3 +1,4 @@
+import 'package:cimos_v1/theme/cimos_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:cimos_v1/widgets/widgets.dart';
 
@@ -22,7 +23,7 @@ class CustomLogin extends StatelessWidget {
         ElevatedButton(
             style: ElevatedButton.styleFrom(
                 fixedSize: const Size(230, 50),
-                primary: Colors.red[900],
+                primary: CimosTheme.primary,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50))),
             onPressed: () {

@@ -6,7 +6,7 @@ import '/http/http_exec.dart';
 import '/models/http_response.dart';
 
 import 'package:cimos_v1/widgets/widgets.dart'
-    show CardVideos, CustomButtonBar, Loaders, LoadingIcon;
+    show CardVideos2, CustomButtonBar, Loaders, LoadingIcon;
 
 import 'package:cimos_v1/search/search_delegate.dart';
 
@@ -105,7 +105,7 @@ class _VideosOnDemandState extends State<VideosOnDemand> {
                       controller: scrollController,
                       itemCount: numberElements.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return CardVideos(video: vods[numberElements[index]]);
+                        return CardVideos2(video: vods[numberElements[index]]);
                       }),
                   if (isLoadingScroll)
                     Positioned(

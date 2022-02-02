@@ -3,7 +3,7 @@ import '/models/http_response.dart';
 import 'package:flutter/material.dart';
 import '/models/vods.dart' show CimosVODS;
 import '/widgets/shared/shared_widgets.dart' show Loaders;
-import '/widgets/widgets.dart' show CardVideos, LoadingIcon, VideoPlayerText;
+import '/widgets/widgets.dart' show CardVideos2, LoadingIcon, VideoPlayerText;
 
 class VideoSearchDelegate extends SearchDelegate {
   @override
@@ -135,7 +135,7 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
                       controller: scrollController,
                       itemCount: numberElements.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return CardVideos(video: vods[numberElements[index]]);
+                        return CardVideos2(video: vods[numberElements[index]]);
                       }),
                   if (isLoadingScroll)
                     Positioned(
