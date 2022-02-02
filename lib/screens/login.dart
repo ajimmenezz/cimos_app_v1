@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
                               TextStyle(fontSize: 20, color: Colors.red[900]))),
                   TextButton(
                       onPressed: () {},
-                      child: Text('Registro',
+                      child: Text('Regitro',
                           style:
                               TextStyle(fontSize: 20, color: Colors.red[900]))),
                 ],
