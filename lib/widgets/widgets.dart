@@ -1,7 +1,7 @@
 export '/widgets/card_videos.dart';
 export '/widgets/customBottonBar.dart';
 export '/widgets/input_sesion.dart';
-export '/widgets/LoadingIcon.dart';
+export 'loadingIcon.dart';
 export '/widgets/login_container.dart';
 export '/widgets/logo.dart';
 export '/widgets/register_container.dart';

@@ -1,3 +1,4 @@
+import 'package:cimos_v1/theme/cimos_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cimos_v1/providers/ui_provider.dart';
@@ -40,7 +41,7 @@ class _CustomButtonBarState extends State<CustomButtonBar> {
       // Style
       currentIndex: currentIndex,
       selectedFontSize: 12,
-      selectedItemColor: Colors.red,
+      selectedItemColor: CimosTheme.primary,
       iconSize: 25,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

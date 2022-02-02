@@ -19,7 +19,7 @@ class VideoDetailsScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.blueGrey[900],
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Container(
+        SizedBox(
           child: ChewieListItem(
             videoPlayerController: VideoPlayerController.network(
               information['video'],
