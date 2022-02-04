@@ -10,19 +10,19 @@ class CustomRegister extends StatelessWidget {
       children: [
         const SizedBox(height: 30),
 
-        const CustomInputSesion(
+        CustomInputSesion(
           hintext: 'Usuario o Email',
           icon: Icons.person,
         ),
 
         const SizedBox(height: 50),
 
-        const CustomInputSesion(
+        CustomInputSesion(
             hintext: 'Contraseña', icon: Icons.password, obscureText: true),
 
         const SizedBox(height: 50),
 
-        const CustomInputSesion(
+        CustomInputSesion(
             hintext: 'Confirmar Contraseña',
             icon: Icons.check,
             obscureText: true),
@@ -51,7 +51,9 @@ class CustomRegister extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-                onPressed: () {}, icon: const Icon(Icons.email), iconSize: MediaQuery.of(context).size.width * .15),
+                onPressed: () {},
+                icon: const Icon(Icons.email),
+                iconSize: MediaQuery.of(context).size.width * .15),
             IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.facebook),

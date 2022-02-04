@@ -1,15 +1,30 @@
-import 'package:cimos_v1/theme/cimos_theme.dart';
+import 'package:cimos_v1/widgets/customBottonBar.dart';
 import 'package:flutter/material.dart';
-import 'package:cimos_v1/widgets/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:cimos_v1/theme/cimos_theme.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cimos'), backgroundColor: CimosTheme.primary,),
-     bottomNavigationBar: const CustomButtonBar(),
-    );
+        appBar: AppBar(
+          title: const Text('Cimos'),
+          backgroundColor: CimosTheme.primary,
+        ),
+        bottomNavigationBar: const CustomButtonBar(),
+        body: Column(
+          children: [
+            FloatingActionButton(
+              backgroundColor: Colors.red,
+              onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove('email');
+              },
+            ),
+          ],
+        ));
   }
 }

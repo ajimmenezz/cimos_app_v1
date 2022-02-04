@@ -1,7 +1,7 @@
-import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '/commons/constants.dart';
 import '/models/http_response.dart';
-import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class HttpExec {
   String endPoint;

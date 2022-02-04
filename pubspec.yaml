@@ -41,6 +41,7 @@ dependencies:
   chewie: ^1.1.0
   video_player: ^2.2.11
   flutter_video_cast: ^1.0.3
+  shared_preferences: ^2.0.12
   
   
 
