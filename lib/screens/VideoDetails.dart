@@ -1,4 +1,5 @@
 
+import 'package:cimos_v1/theme/cimos_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:cimos_v1/widgets/widgets.dart' show ChewieListItem, VideoPlayerText;
@@ -14,8 +15,8 @@ class VideoDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Clase On Demand'),
-        backgroundColor: Colors.red[700],
+        title: const Text('Clase On Demand'),
+        backgroundColor: CimosTheme.primary,
       ),
       backgroundColor: Colors.blueGrey[900],
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [

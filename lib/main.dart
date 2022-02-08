@@ -11,7 +11,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var email = prefs.getString('email');
-  print(email);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -21,11 +20,11 @@ Future<void> main() async {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
-        home: email == null ? LoginScreen() : HomePageScreen(),
+        home: email == null ? const LoginScreen() : const HomePageScreen(),
         routes: {
           '/login': (context) => const LoginScreen(),
           '/home': (context) => const HomePageScreen(),
-          '/topvideos': (context) => const VideosOnDemand(),
+          '/videosondemand': (context) => const VideosOnDemand(),
           '/videosdetails': (context) =>
               const VideoDetailsScreen(information: {}),
         },

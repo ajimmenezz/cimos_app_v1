@@ -31,7 +31,7 @@ class _CustomButtonBarState extends State<CustomButtonBar> {
             break;
           case 1:
             Navigator.of(context).pop();
-            Navigator.pushNamed(context, '/topvideos');
+            Navigator.pushNamed(context, '/videosondemand');
             break;
           case 2:
             // Falta esta screen

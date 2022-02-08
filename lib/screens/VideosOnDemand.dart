@@ -1,4 +1,3 @@
-import 'package:cimos_v1/theme/cimos_theme.dart';
 import 'package:flutter/material.dart';
 
 import '/models/vods.dart';
@@ -7,6 +6,7 @@ import '/models/http_response.dart';
 
 import 'package:cimos_v1/widgets/widgets.dart'
     show CardVideos2, CustomButtonBar, Loaders, LoadingIcon;
+import 'package:cimos_v1/theme/cimos_theme.dart';
 
 import 'package:cimos_v1/search/search_delegate.dart';
 

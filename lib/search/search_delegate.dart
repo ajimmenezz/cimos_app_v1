@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
 import '/http/http_exec.dart';
 import '/models/http_response.dart';
-import 'package:flutter/material.dart';
+
 import '/models/vods.dart' show CimosVODS;
 import '/widgets/shared/shared_widgets.dart' show Loaders;
+
 import '/widgets/widgets.dart' show CardVideos2, LoadingIcon, VideoPlayerText;
+import 'package:cimos_v1/theme/cimos_theme.dart';
 
 class VideoSearchDelegate extends SearchDelegate {
   @override
@@ -36,7 +39,7 @@ class VideoSearchDelegate extends SearchDelegate {
       return const Center(
         child: Icon(
           Icons.search,
-          color: Colors.black,
+          color: CimosTheme.primary,
           size: 130,
         ),
       );
@@ -58,6 +61,7 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
   bool anwerError = false;
   late HttpResponse response;
   List<CimosVODS> vods = <CimosVODS>[];
+  var numberVideosResponse = [];
   int numberPage = 1;
   final String query;
   _VideosOnDemandState(this.query);
@@ -70,6 +74,7 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
         for (var video in response.body['videos']) {
           vods.add(CimosVODS.fromJson(video));
           anwerError = true;
+          numberVideosResponse = response.body['videos'];
         }
       }
 
@@ -88,7 +93,8 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
     _getVods();
     scrollController.addListener(() {
       if ((scrollController.position.pixels + 500) >=
-          scrollController.position.maxScrollExtent) {
+              scrollController.position.maxScrollExtent &&
+          numberVideosResponse.length == 5) {
         fetchData();
         numberPage = numberPage + 1;
         _getVods();
@@ -97,9 +103,11 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
   }
 
   void addElements() {
-    final lastId = numberElements.last;
-    numberElements.addAll([1, 2, 3, 4].map((e) => lastId + e));
-    setState(() {});
+    if (numberVideosResponse.length == 5) {
+      final lastId = numberElements.last;
+      numberElements.addAll([1, 2, 3, 4].map((e) => lastId + e));
+      setState(() {});
+    }
   }
 
   Future fetchData() async {
@@ -108,7 +116,7 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
     isLoadingScroll = true;
     setState(() {});
 
-    await Future.delayed(const Duration(seconds: 3));
+    Future.delayed(const Duration(seconds: 2));
 
     addElements();
 
