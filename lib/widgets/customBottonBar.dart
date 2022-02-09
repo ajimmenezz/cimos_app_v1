@@ -34,7 +34,8 @@ class _CustomButtonBarState extends State<CustomButtonBar> {
             Navigator.pushNamed(context, '/videosondemand');
             break;
           case 2:
-            // Falta esta screen
+            Navigator.of(context).pop();
+            Navigator.pushNamed(context, '/profile');
             break;
         }
       },

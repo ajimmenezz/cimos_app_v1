@@ -9,8 +9,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  var email = prefs.getString('email');
+  String token = prefs.getString('token').toString();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -20,11 +22,12 @@ Future<void> main() async {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
-        home: email == null ? const LoginScreen() : const HomePageScreen(),
+        home: token == null ? const LoginScreen() : const HomePageScreen(),
         routes: {
           '/login': (context) => const LoginScreen(),
           '/home': (context) => const HomePageScreen(),
           '/videosondemand': (context) => const VideosOnDemand(),
+          '/profile': (context) => const ProfilePageScreen(),
           '/videosdetails': (context) =>
               const VideoDetailsScreen(information: {}),
         },

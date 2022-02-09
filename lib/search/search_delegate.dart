@@ -116,7 +116,7 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
     isLoadingScroll = true;
     setState(() {});
 
-    Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
 
     addElements();
 

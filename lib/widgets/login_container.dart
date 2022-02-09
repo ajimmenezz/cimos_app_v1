@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:cimos_v1/widgets/widgets.dart' show LoadingIcon;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,29 +24,32 @@ class _CustomLoginState extends State<CustomLogin> {
   bool login = false;
   bool mensaje = false;
   Future<void> _getVods(user, psw) async {
-    login = true;
     response = await HttpExec.getResponse(
         'https://api.cimos.mx/v1/Login?usr=$user&pwd=$psw');
 
     setState(() {
       if (response.status == 200) {
-        login = false;
-        access = true;
-        validationAccess(access, response);
+        validationAccess(response);
+        saveDataGlobal(response);
       } else {
-        login = false;
-        mensaje = true;
+        menssageError();
       }
     });
   }
 
-  validationAccess(bool access, respon) async {
-    if (access) {
-      Navigator.of(context).pop();
-      Navigator.pushNamed(context, '/home');
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('email', respon.body['user']['Token']);
-    }
+  validationAccess(respon) async {
+    login = true;
+    await Future.delayed(const Duration(seconds: 3));
+    login = false;
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, '/home');
+  }
+
+  menssageError() async {
+    mensaje = true;
+    await Future.delayed(const Duration(seconds: 5));
+    mensaje = false;
+    setState(() {});
   }
 
   @override
@@ -101,9 +102,11 @@ class _CustomLoginState extends State<CustomLogin> {
                 _getVods(user, password);
               },
               child: const Text('Ingresar', style: TextStyle(fontSize: 20))),
+          const SizedBox(height: 20),
           if (login)
             Positioned(
               bottom: 30,
+              top: 400,
               left: size.width * 0.5 - 30,
               child: const LoadingIcon(),
             ),
@@ -118,4 +121,12 @@ class _CustomLoginState extends State<CustomLogin> {
       ),
     ]);
   }
+}
+
+saveDataGlobal(respon) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('token', respon.body['user']['Token']);
+  prefs.setString('email', respon.body['user']['Email']);
+  prefs.setString('name', respon.body['user']['Name']);
+  prefs.setString('short', respon.body['user']['Short']);
 }

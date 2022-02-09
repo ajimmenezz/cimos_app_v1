@@ -17,13 +17,7 @@ class HomePageScreen extends StatelessWidget {
         bottomNavigationBar: const CustomButtonBar(),
         body: Column(
           children: [
-            FloatingActionButton(
-              backgroundColor: Colors.red,
-              onPressed: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('email');
-              },
-            ),
+            
           ],
         ));
   }
