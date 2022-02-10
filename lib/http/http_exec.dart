@@ -8,8 +8,16 @@ class HttpExec {
 
   HttpExec(this.endPoint);
 
-  static getResponse(endPoint) async {
-    var response = await http.get(Uri.parse(endPoint));
+  static getResponse({String endPoint = '', String? token}) async {
+    Map<String, String> headers = {};
+    if (token != null) {
+      headers = {
+        'Token': token,
+      };
+    }
+    var response = await http.get(Uri.parse(endPoint), headers: headers);
+    print(response.body);
+
     return validateResponse(response);
   }
 

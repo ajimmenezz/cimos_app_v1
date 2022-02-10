@@ -1,5 +1,8 @@
+import 'package:cimos_v1/http/http_exec.dart';
+import 'package:cimos_v1/models/http_response.dart';
 import 'package:cimos_v1/screens/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '/models/vods.dart';
 
 class CardVideos2 extends StatelessWidget {
@@ -12,11 +15,12 @@ class CardVideos2 extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         final information = {
-          'name': video.name,
-          'created': video.created,
-          'duration': video.duration,
-          'description': video.description,
-          'video': video.file
+          'id': video.id,
+          // 'name': video.name,
+          // 'created': video.created,
+          // 'duration': video.duration,
+          // 'description': video.description,
+          // 'video': video.file
         };
         ViewInformationVideo(context, information);
       },
@@ -138,13 +142,28 @@ class CardVideos2 extends StatelessWidget {
     );
   }
 
-  void ViewInformationVideo(context, information) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => VideoDetailsScreen(
-            information: information,
-          ),
-        ));
+  Future<void> ViewInformationVideo(context, information) async {
+    late HttpResponse response;
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token').toString();
+    // Podriamos hacer la peticion aca y validar con un if
+
+    response = await HttpExec.getResponse(
+        endPoint: "https://api.cimos.mx/v1/VID?vid=${information['id']}",
+        token: token);
+    if (response.status == 200) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VideoDetailsScreen(
+              information: response.body,
+            ),
+          ));
+    } else if (response.status == 401) {
+      removeDataGlobal();
+      Navigator.of(context).pop();
+      Navigator.pushNamed(context, '/login');
+    }
   }
 }

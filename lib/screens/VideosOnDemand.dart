@@ -1,4 +1,6 @@
+import 'package:cimos_v1/screens/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/models/vods.dart';
 import '/http/http_exec.dart';
@@ -23,13 +25,19 @@ class _VideosOnDemandState extends State<VideosOnDemand> {
   List<CimosVODS> vods = <CimosVODS>[];
   int numberPage = 1;
   Future<void> _getVods() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token').toString();
+
     response = await HttpExec.getResponse(
-        'https://api.cimos.mx/v1/VOD?page=$numberPage&per_page=5');
+        endPoint: 'https://api.cimos.mx/v1/VOD?page=$numberPage&per_page=5',
+        token: token);
     setState(() {
       if (response.status == 200) {
         for (var video in response.body['videos']) {
           vods.add(CimosVODS.fromJson(video));
         }
+      } else {
+        print('No da');
       }
 
       _isLoading = false;

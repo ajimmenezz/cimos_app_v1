@@ -1,3 +1,4 @@
+import 'package:cimos_v1/screens/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import '/http/http_exec.dart';
 import '/models/http_response.dart';
@@ -68,7 +69,8 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
 
   Future<void> _getVods() async {
     response = await HttpExec.getResponse(
-        'https://api.cimos.mx/v1/VOD?page=$numberPage&per_page=5&search=$query');
+      endPoint: 'https://api.cimos.mx/v1/VOD?page=$numberPage&per_page=5',
+    );
     setState(() {
       if (response.status == 200) {
         for (var video in response.body['videos']) {
@@ -76,7 +78,12 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
           anwerError = true;
           numberVideosResponse = response.body['videos'];
         }
-      }
+       }
+        // else {
+      //   removeDataGlobal();
+      //   Navigator.of(context).pop();
+      //   Navigator.pushNamed(context, '/login');
+      // }
 
       _isLoading = false;
     });

@@ -25,7 +25,7 @@ class _CustomLoginState extends State<CustomLogin> {
   bool mensaje = false;
   Future<void> _getVods(user, psw) async {
     response = await HttpExec.getResponse(
-        'https://api.cimos.mx/v1/Login?usr=$user&pwd=$psw');
+        endPoint: 'https://api.cimos.mx/v1/Login?usr=$user&pwd=$psw');
 
     setState(() {
       if (response.status == 200) {
