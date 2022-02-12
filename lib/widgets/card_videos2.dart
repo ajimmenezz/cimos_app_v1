@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
+import '/models/vods.dart';
 import 'package:cimos_v1/http/http_exec.dart';
 import 'package:cimos_v1/models/http_response.dart';
+
 import 'package:cimos_v1/screens/screens.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '/models/vods.dart';
 
 class CardVideos2 extends StatelessWidget {
   final CimosVODS video;
@@ -16,11 +18,6 @@ class CardVideos2 extends StatelessWidget {
       onTap: () {
         final information = {
           'id': video.id,
-          // 'name': video.name,
-          // 'created': video.created,
-          // 'duration': video.duration,
-          // 'description': video.description,
-          // 'video': video.file
         };
         ViewInformationVideo(context, information);
       },
@@ -157,7 +154,7 @@ class CardVideos2 extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => VideoDetailsScreen(
-              information: response.body,
+              information: response.body['video'],
             ),
           ));
     } else if (response.status == 401) {

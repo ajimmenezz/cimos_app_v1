@@ -23,7 +23,7 @@ class VideoDetailsScreen extends StatelessWidget {
         SizedBox(
           child: ChewieListItem(
             videoPlayerController: VideoPlayerController.network(
-              information['video'],
+              information['File'],
             ),
             looping: true,
           ),
@@ -32,11 +32,10 @@ class VideoDetailsScreen extends StatelessWidget {
         ),
         Column(
           children: [
-            VideoPlayerText(value: information['name'], color: Colors.white, size: 30),
-            VideoPlayerText(value: information['created'], color: Colors.green, size: 20),
-            VideoPlayerText(value: '${information['duration']} Min'.toString(), color: Colors.green, size: 20),
-            VideoPlayerText(value: '${information['description'] ?? 'Sin descripcion'}', color: Colors.white, size: 20),
-            // CastSample(),
+            VideoPlayerText(value: information['Name'], color: Colors.white, size: 30),
+            VideoPlayerText(value: information['Created'], color: Colors.green, size: 20),
+            VideoPlayerText(value: '${information['Duration']} Min'.toString(), color: Colors.green, size: 20),
+            VideoPlayerText(value: '${information['DEscription']?? 'Sin descripcion'}', color: Colors.white, size: 20),
           ],
         )
       ]),

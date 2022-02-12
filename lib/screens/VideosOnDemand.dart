@@ -1,4 +1,3 @@
-import 'package:cimos_v1/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +9,7 @@ import 'package:cimos_v1/widgets/widgets.dart'
     show CardVideos2, CustomButtonBar, Loaders, LoadingIcon;
 import 'package:cimos_v1/theme/cimos_theme.dart';
 
+import 'package:cimos_v1/screens/ProfilePage.dart';
 import 'package:cimos_v1/search/search_delegate.dart';
 
 class VideosOnDemand extends StatefulWidget {
@@ -21,6 +21,7 @@ class VideosOnDemand extends StatefulWidget {
 
 class _VideosOnDemandState extends State<VideosOnDemand> {
   bool _isLoading = true;
+  bool prueba = false;
   late HttpResponse response;
   List<CimosVODS> vods = <CimosVODS>[];
   int numberPage = 1;
@@ -36,8 +37,9 @@ class _VideosOnDemandState extends State<VideosOnDemand> {
         for (var video in response.body['videos']) {
           vods.add(CimosVODS.fromJson(video));
         }
-      } else {
-        print('No da');
+      } else if (response.status == 401) {
+        _isLoading = false;
+        prueba = true;
       }
 
       _isLoading = false;
@@ -106,20 +108,50 @@ class _VideosOnDemandState extends State<VideosOnDemand> {
             ? Center(
                 child: Loaders.circular(),
               )
-            : Stack(
+            : // Validacion
+            Stack(
                 children: [
                   ListView.builder(
                       physics: const BouncingScrollPhysics(), // Rebote de iOS
                       controller: scrollController,
                       itemCount: numberElements.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return CardVideos2(video: vods[numberElements[index]]);
+                        return vods.length > 2
+                            ? CardVideos2(video: vods[numberElements[index]])
+                            : Text('');
                       }),
                   if (isLoadingScroll)
                     Positioned(
                       bottom: 40,
                       left: size.width * 0.5 - 30,
                       child: const LoadingIcon(),
+                    ),
+                  if (prueba)
+                    AlertDialog(
+                      elevation: 5,
+                      title: const Text('Titulo'),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusDirectional.circular(10)),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Text(
+                              'Otro dispositivo inicio sesion con su usuario, vuelva a iniciar sesion'),
+                          SizedBox(height: 10),
+                          FlutterLogo(
+                            size: 100,
+                          )
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            removeDataGlobal();
+                            Navigator.pushNamed(context, '/login');
+                          },
+                          child: const Text('Ok'),
+                        ),
+                      ],
                     )
                 ],
               ));

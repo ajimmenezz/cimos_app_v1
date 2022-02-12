@@ -17,14 +17,7 @@ class HomePageScreen extends StatelessWidget {
         bottomNavigationBar: const CustomButtonBar(),
         body: Column(
           children: [
-            ElevatedButton(
-                onPressed: () async {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  String token = prefs.getString('token').toString();
-                  print(token);
-                },
-                child: Text('fds'))
+           
           ],
         ));
   }

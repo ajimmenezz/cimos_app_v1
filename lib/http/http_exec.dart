@@ -16,8 +16,6 @@ class HttpExec {
       };
     }
     var response = await http.get(Uri.parse(endPoint), headers: headers);
-    print(response.body);
-
     return validateResponse(response);
   }
 
@@ -34,11 +32,9 @@ class HttpExec {
 
   static processCimosReponse(response) {
     final Map<String, dynamic> r = json.decode(response.body);
-    return (r['response']['status'] == 200)
-        ? HttpResponse(
-            status: r['response']['status'],
-            description: r['response']['description'],
-            body: r['response']['body'])
-        : returnError();
+    return HttpResponse(
+        status: r['response']['status'],
+        description: r['response']['description'],
+        body: r['response']['body']);
   }
 }

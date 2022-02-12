@@ -12,7 +12,6 @@ Future<void> main() async {
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String token = prefs.getString('token').toString();
-
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -22,7 +21,7 @@ Future<void> main() async {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
-        home: token == null ? const LoginScreen() : const HomePageScreen(),
+        home: token == 'null' ? const LoginScreen() : const HomePageScreen(),
         routes: {
           '/login': (context) => const LoginScreen(),
           '/home': (context) => const HomePageScreen(),

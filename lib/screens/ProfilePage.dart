@@ -18,7 +18,7 @@ class ProfilePageScreen extends StatelessWidget {
         body: Center(
             child: Column(
           children: [
-            CircleAvatar(
+           const CircleAvatar(
               child: Text('JJ'),
               backgroundColor: Colors.black,
             ),
@@ -29,7 +29,7 @@ class ProfilePageScreen extends StatelessWidget {
                   backgroundColor:
                       MaterialStateProperty.all(CimosTheme.primary)),
               onPressed: () {
-                removeDataGlobal();
+                // removeDataGlobal();
                 Navigator.of(context).pop();
                 Navigator.pushNamed(context, '/login');
               },
@@ -47,8 +47,5 @@ removeDataGlobal() async {
   prefs.remove('short');
 }
 
-getDataGlobal() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String short = prefs.getString('Short').toString();
-  return short;
-}
+
+

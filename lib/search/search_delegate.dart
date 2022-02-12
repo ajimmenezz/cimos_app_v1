@@ -1,5 +1,5 @@
-import 'package:cimos_v1/screens/ProfilePage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '/http/http_exec.dart';
 import '/models/http_response.dart';
 
@@ -8,6 +8,7 @@ import '/widgets/shared/shared_widgets.dart' show Loaders;
 
 import '/widgets/widgets.dart' show CardVideos2, LoadingIcon, VideoPlayerText;
 import 'package:cimos_v1/theme/cimos_theme.dart';
+import 'package:cimos_v1/screens/ProfilePage.dart';
 
 class VideoSearchDelegate extends SearchDelegate {
   @override
@@ -60,6 +61,7 @@ class VideosSearchResult extends StatefulWidget {
 class _VideosOnDemandState extends State<VideosSearchResult> {
   bool _isLoading = true;
   bool anwerError = false;
+  bool prueba = false;
   late HttpResponse response;
   List<CimosVODS> vods = <CimosVODS>[];
   var numberVideosResponse = [];
@@ -68,8 +70,13 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
   _VideosOnDemandState(this.query);
 
   Future<void> _getVods() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token').toString();
+
     response = await HttpExec.getResponse(
-      endPoint: 'https://api.cimos.mx/v1/VOD?page=$numberPage&per_page=5',
+      endPoint:
+          'https://api.cimos.mx/v1/VOD?page=$numberPage&per_page=5&search=$query',
+      token: token,
     );
     setState(() {
       if (response.status == 200) {
@@ -78,13 +85,12 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
           anwerError = true;
           numberVideosResponse = response.body['videos'];
         }
-       }
-        // else {
-      //   removeDataGlobal();
-      //   Navigator.of(context).pop();
-      //   Navigator.pushNamed(context, '/login');
-      // }
-
+      } else if (response.status == 401) {
+        _isLoading = false;
+        prueba = true;
+        // removeDataGlobal();
+        // Navigator.pushNamed(context, '/login');
+      }
       _isLoading = false;
     });
   }
@@ -157,6 +163,33 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
                       bottom: 40,
                       left: size.width * 0.5 - 30,
                       child: const LoadingIcon(),
+                    ),
+                  if (prueba)
+                    AlertDialog(
+                      elevation: 5,
+                      title: const Text('Titulo'),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusDirectional.circular(10)),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Text(
+                              'Otro dispositivo inicio sesion con su usuario, vuelva a iniciar sesion'),
+                          SizedBox(height: 10),
+                          FlutterLogo(
+                            size: 100,
+                          )
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            removeDataGlobal();
+                            Navigator.pushNamed(context, '/login');
+                          },
+                          child: const Text('Ok'),
+                        ),
+                      ],
                     )
                 ],
               )

@@ -47,7 +47,7 @@ class _CustomLoginState extends State<CustomLogin> {
 
   menssageError() async {
     mensaje = true;
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 3));
     mensaje = false;
     setState(() {});
   }
