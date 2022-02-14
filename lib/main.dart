@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:cimos_v1/screens/screens.dart';
 import 'package:cimos_v1/providers/ui_provider.dart';
-
-import 'package:cimos_v1/theme/cimos_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:cimos_v1/screens/screens.dart';
+import 'package:cimos_v1/theme/cimos_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String token = prefs.getString('token').toString();
+  
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

@@ -1,5 +1,7 @@
+import 'package:cimos_v1/providers/ui_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cimos_v1/widgets/widgets.dart' show LoadingIcon;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/models/http_response.dart';
@@ -29,6 +31,8 @@ class _CustomLoginState extends State<CustomLogin> {
 
     setState(() {
       if (response.status == 200) {
+        user = '';
+        password = '';
         validationAccess(response);
         saveDataGlobal(response);
       } else {
@@ -54,7 +58,11 @@ class _CustomLoginState extends State<CustomLogin> {
 
   @override
   Widget build(BuildContext context) {
+    // Inicializacion
+    final uiProvider = Provider.of<UiProvider>(context);
+
     final size = MediaQuery.of(context).size;
+
     return Stack(children: [
       Column(
         children: [
@@ -65,7 +73,7 @@ class _CustomLoginState extends State<CustomLogin> {
                   hintText: 'Usuario o Email',
                   hintStyle:
                       TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                  suffixIcon: Icon(Icons.home, size: 40),
+                  suffixIcon: Icon(Icons.people, size: 40),
                   contentPadding:
                       EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                   border: OutlineInputBorder(
@@ -98,7 +106,10 @@ class _CustomLoginState extends State<CustomLogin> {
                   primary: CimosTheme.primary,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50))),
-              onPressed: () {
+              onPressed: () async {
+                // Set
+                uiProvider.selectedMenuOpt = 0;
+                FocusScope.of(context).unfocus();
                 _getVods(user, password);
               },
               child: const Text('Ingresar', style: TextStyle(fontSize: 20))),

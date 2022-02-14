@@ -13,25 +13,13 @@ class LoginScreen extends StatelessWidget {
             children: [
               const LogoContainer(),
               const SizedBox(height: 5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                      onPressed: () {},
-                      child: Text('Usuario o Email',
-                          style:
-                              TextStyle(fontSize: 20, color: Colors.red[900]))),
-                ],
-              ),
               Column(
                 children: [
                   Container(
-                    // Mirar
                     margin: const EdgeInsets.only(bottom: 30),
                     width: double.infinity,
                     height: 500,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
+                    child: Column(
                       children: [
                         // Contenedor de inicio de sesion
                         Container(

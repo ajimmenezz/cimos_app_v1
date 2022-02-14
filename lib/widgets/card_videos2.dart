@@ -158,9 +158,7 @@ class CardVideos2 extends StatelessWidget {
             ),
           ));
     } else if (response.status == 401) {
-      removeDataGlobal();
-      Navigator.of(context).pop();
-      Navigator.pushNamed(context, '/login');
+      removeDataGlobal(context);
     }
   }
 }

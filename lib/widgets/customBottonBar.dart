@@ -46,7 +46,7 @@ class _CustomButtonBarState extends State<CustomButtonBar> {
       iconSize: 25,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Top'),
+        BottomNavigationBarItem(icon: Icon(Icons.play_arrow), label: 'Videos'),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
     );

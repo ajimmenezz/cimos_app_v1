@@ -1,4 +1,7 @@
+import 'package:cimos_v1/main.dart';
+import 'package:cimos_v1/providers/ui_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,11 +17,12 @@ class ProfilePageScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Profile'),
           backgroundColor: CimosTheme.primary,
-        ), bottomNavigationBar: const CustomButtonBar(),
+        ),
+        bottomNavigationBar: const CustomButtonBar(),
         body: Center(
             child: Column(
           children: [
-           const CircleAvatar(
+            const CircleAvatar(
               child: Text('JJ'),
               backgroundColor: Colors.black,
             ),
@@ -39,13 +43,12 @@ class ProfilePageScreen extends StatelessWidget {
   }
 }
 
-removeDataGlobal() async {
+removeDataGlobal(context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.remove('token');
-  prefs.remove('email');
-  prefs.remove('name');
-  prefs.remove('short');
+  await prefs.remove('token');
+  await prefs.remove('email');
+  await prefs.remove('name');
+  await prefs.remove('short');
+  Navigator.of(context).pop();
+  Navigator.pushNamed(context, '/login');
 }
-
-
-

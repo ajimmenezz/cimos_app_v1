@@ -6,9 +6,9 @@ import '/models/http_response.dart';
 import '/models/vods.dart' show CimosVODS;
 import '/widgets/shared/shared_widgets.dart' show Loaders;
 
-import '/widgets/widgets.dart' show CardVideos2, LoadingIcon, VideoPlayerText;
+import '/widgets/widgets.dart'
+    show CardVideos2, LoadingIcon, VideoPlayerText, CustomMessageToken;
 import 'package:cimos_v1/theme/cimos_theme.dart';
-import 'package:cimos_v1/screens/ProfilePage.dart';
 
 class VideoSearchDelegate extends SearchDelegate {
   @override
@@ -61,7 +61,7 @@ class VideosSearchResult extends StatefulWidget {
 class _VideosOnDemandState extends State<VideosSearchResult> {
   bool _isLoading = true;
   bool anwerError = false;
-  bool prueba = false;
+  bool erroToken = false;
   late HttpResponse response;
   List<CimosVODS> vods = <CimosVODS>[];
   var numberVideosResponse = [];
@@ -86,10 +86,9 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
           numberVideosResponse = response.body['videos'];
         }
       } else if (response.status == 401) {
+        erroToken = true;
         _isLoading = false;
-        prueba = true;
-        // removeDataGlobal();
-        // Navigator.pushNamed(context, '/login');
+        isLoadingScroll = false;
       }
       _isLoading = false;
     });
@@ -107,7 +106,8 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
     scrollController.addListener(() {
       if ((scrollController.position.pixels + 500) >=
               scrollController.position.maxScrollExtent &&
-          numberVideosResponse.length == 5) {
+          numberVideosResponse.length == 5 &&
+          !erroToken) {
         fetchData();
         numberPage = numberPage + 1;
         _getVods();
@@ -164,40 +164,23 @@ class _VideosOnDemandState extends State<VideosSearchResult> {
                       left: size.width * 0.5 - 30,
                       child: const LoadingIcon(),
                     ),
-                  if (prueba)
-                    AlertDialog(
-                      elevation: 5,
-                      title: const Text('Titulo'),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusDirectional.circular(10)),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          Text(
-                              'Otro dispositivo inicio sesion con su usuario, vuelva a iniciar sesion'),
-                          SizedBox(height: 10),
-                          FlutterLogo(
-                            size: 100,
-                          )
-                        ],
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            removeDataGlobal();
-                            Navigator.pushNamed(context, '/login');
-                          },
-                          child: const Text('Ok'),
-                        ),
-                      ],
-                    )
+                  if (erroToken)
+                    const CustomMessageToken(
+                        menssage:
+                            'Otro dispositivo inicio sesion con su usuario, vuelva a iniciar sesion',
+                        tittle: 'Vuelva a iniciar sesion')
                 ],
               )
-            : Center(
-                child: VideoPlayerText(
-                color: Colors.black,
-                size: 30,
-                value: 'No se encontraron resultados sobre "$query"',
-              ));
+            : erroToken
+                ? const CustomMessageToken(
+                    menssage:
+                        'Otro dispositivo inicio sesion con su usuario, vuelva a iniciar sesion',
+                    tittle: 'Vuelva a iniciar sesion')
+                : Center(
+                    child: VideoPlayerText(
+                    color: Colors.black,
+                    size: 30,
+                    value: 'No se encontraron resultados sobre "$query"',
+                  ));
   }
 }
